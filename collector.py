@@ -12,7 +12,7 @@ mycursor = redditDB.cursor()
 mycursor.execute("CREATE TABLE Hiphopheads (comment_ID INT PRIMARY KEY AUTO_INCREMENT, albumname VARCHAR(100), body VARCHAR(10000), sentiment INT);")
 
 reddit = praw.Reddit(client_id='j7Afg69TlZOI2A',
-                     client_secret='Gk1BAnzZbPtK6YgZqRaQ8814v1g', password='Romoregis1!',
+                     client_secret='Gk1BAnzZbPtK6YgZqRaQ8814v1g', password='test!',
                      user_agent='untitled', username='redditalbumvisual')
 
 for submission in reddit.subreddit('hiphopheads').top('all', limit = 1500):
