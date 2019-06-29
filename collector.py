@@ -1,16 +1,8 @@
 import praw
-import mysql.connector
 import textfiltersandprocessors as filter
+import reddit_db as DB
 
-# SQL INIT
-redditDB = mysql.connector.connect(
-    user='root',
-    host='localhost',
-    database='redditproject'
-)
-
-mycursor = redditDB.cursor()
-mycursor.execute(
+DB.mycursor.execute(
     "CREATE TABLE IF NOT EXISTS Hiphopheads (comment_ID INT PRIMARY KEY AUTO_INCREMENT, albumname VARCHAR(100), reddituser VARCHAR(20), body VARCHAR(10000), sentiment INT);")
 
 reddit = praw.Reddit(client_id='j7Afg69TlZOI2A',
