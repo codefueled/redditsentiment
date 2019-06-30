@@ -28,6 +28,6 @@ for submission in reddit.subreddit('hiphopheads').top('all', limit=1500):
 
                 sql = "INSERT INTO Hiphopheads (albumname, reddituser, body, sentiment) VALUES (%s, %s, %s, NULL)"
                 commentinfo = (submission.title[14:], commentauthor, commentbody)
-                mycursor.execute(sql, commentinfo)
-                redditDB.commit()
+                DB.mycursor.execute(sql, commentinfo)
+                DB.redditDB.commit()
         print(submission.title + ": comments inserted into SQL table")
