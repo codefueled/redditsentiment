@@ -2,6 +2,7 @@
 import reddit_db as DB 
 import re
 import string
+from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
 def removeUnicodeFromComment(commentbody):
@@ -14,7 +15,7 @@ def fetch_random_comment_to_token_list():
     return comments
 
 def fetch_comments_with_sentiment():
-    DB.mycursor.execute("SELECT body, sentiment FROM hiphopheads WHERE sentiment IS NOT NULL")
+    DB.mycursor.execute("SELECT body, sentiment FROM hiphopheads WHERE sentiment IS NOT NULL AND sentiment <> 99")
     comments = DB.mycursor.fetchall()
     return comments
 
@@ -53,7 +54,41 @@ def comment_to_tokens(comment):
     tokens = [token for token in tokens if len(token) > 1]
     #Converts to lowercase
     tokens = [t.lower() for t in tokens]
+    #Get rid of empahsis letters
+    tokens = [remove_emphasis_from_token(token) for token in tokens]
+    #Remove stop-words
+    stop_words = set(stopwords.words('english'))
+    #tokens = [token for token in tokens if token not in stop_words]
     #Stemming
     ps = PorterStemmer()
     tokens = [ps.stem(t) for t in tokens]
     return tokens
+
+def remove_emphasis_from_token(token):
+    ptr1 = 0
+    ptr2 = 1
+    token_size = len(token)
+
+    while ptr2 < token_size - 1:
+        if token[ptr1] == token[ptr2]:
+            count = 0
+            ptr2 = ptr2 + 1
+            while token[ptr2] == token[ptr1] and ptr2 < token_size - 1:
+                count = count + 1
+                ptr2 = ptr2 + 1
+
+            if ptr2 == token_size - 1 and token[ptr2] == token[ptr1]:
+                token = token[:ptr1 + 1]
+            else:
+                token = token[:ptr1+1] + token[ptr1+count+2:]
+            token_size = len(token)
+            ptr2 = ptr1 + 1
+        else:
+            ptr2 = ptr2 + 1
+            ptr1 = ptr1 + 1
+
+    return token
+
+
+
+

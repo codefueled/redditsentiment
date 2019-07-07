@@ -90,4 +90,4 @@ model.summary()
 
 #Train
 
-model.fit(X_train, Y_train, epochs=8, validation_data=(X_test, Y_test), batch_size=15, callbacks = [tensorboard])
+model.fit(X_train, Y_train, epochs=8, validation_data=(X_test, Y_test), batch_size=5, callbacks = [tensorboard])
