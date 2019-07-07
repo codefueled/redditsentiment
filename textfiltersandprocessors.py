@@ -9,12 +9,12 @@ def removeUnicodeFromComment(commentbody):
     return commentbody
 
 def fetch_random_comment_to_token_list():
-    DB.mycursor.execute("SELECT comment_ID, body FROM hiphopheads ORDER BY RAND (0.5) LIMIT 1000")
+    DB.mycursor.execute("SELECT comment_ID, body FROM hiphopheads WHERE sentiment IS NULL ORDER BY RAND (0.5) LIMIT 1000")
     comments = DB.mycursor.fetchall()
     return comments
 
 def fetch_comments_with_sentiment():
-    DB.mycursor.execute("SELECT body FROM hiphopheads WHERE sentiment IS NOT NULL")
+    DB.mycursor.execute("SELECT body, sentiment FROM hiphopheads WHERE sentiment IS NOT NULL")
     comments = DB.mycursor.fetchall()
     return comments
 
