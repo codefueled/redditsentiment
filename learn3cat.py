@@ -8,12 +8,7 @@ import random
 import datetime, os
 import numpy as np
 
-NUM_COMMENTS = 750
-
-log = "C:\\Users\\psych\\Anaconda3\\Personal_Projects\\untitled\\logs"
-logdir = os.path.join(log, datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
-tensorboard = tf.keras.callbacks.TensorBoard(logdir, histogram_freq=1)
-
+NUM_COMMENTS = 880
 gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=.333)
 sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
 
@@ -28,19 +23,17 @@ for comment in labeled_comments:
     if comment[1] == 0:
         neutral_comments.append([f_methods.comment_to_tokens(comment[0]), 0])
     elif comment[1] == 1:
-        positive_comments.append([f_methods.comment_to_tokens(comment[0]), 0])
+        positive_comments.append([f_methods.comment_to_tokens(comment[0]), 1])
     else:
-        negative_comments.append([f_methods.comment_to_tokens(comment[0]), 1])
+        negative_comments.append([f_methods.comment_to_tokens(comment[0]), 2])
 
 #Only take the number of comments specified by NUM_COMMENTS
 neutral_comments = neutral_comments[:NUM_COMMENTS]
 positive_comments = positive_comments[:NUM_COMMENTS]
 negative_comments = negative_comments[:NUM_COMMENTS]
 
-#raw_training_data = neutral_comments[:NUM_COMMENTS - 100] + positive_comments[:NUM_COMMENTS - 100] + negative_comments[:NUM_COMMENTS - 100]
-raw_training_data = positive_comments[:NUM_COMMENTS - 100] + negative_comments[:NUM_COMMENTS - 100]
-#raw_test_data = neutral_comments[NUM_COMMENTS - 100:NUM_COMMENTS] + positive_comments[NUM_COMMENTS - 100:NUM_COMMENTS] + negative_comments[NUM_COMMENTS - 100:NUM_COMMENTS]
-raw_test_data = positive_comments[NUM_COMMENTS - 100:NUM_COMMENTS] + negative_comments[NUM_COMMENTS - 100:NUM_COMMENTS]
+raw_training_data = neutral_comments[:NUM_COMMENTS - 100] + positive_comments[:NUM_COMMENTS - 100] + negative_comments[:NUM_COMMENTS - 100]
+raw_test_data = neutral_comments[NUM_COMMENTS - 100:NUM_COMMENTS] + positive_comments[NUM_COMMENTS - 100:NUM_COMMENTS] + negative_comments[NUM_COMMENTS - 100:NUM_COMMENTS]
 #Shuffle train and test data
 random.shuffle(raw_training_data)
 random.shuffle(raw_test_data)
@@ -64,6 +57,10 @@ Y_test = [comment[1] for comment in raw_test_data]
 Y_test = np.array(Y_test)
 
 #BUILD MODEL
+dim = 4
+log = "C:\\Users\\psych\\Anaconda3\\Personal_Projects\\untitled\\logs"
+logdir = os.path.join(log, f"dimension{dim}")
+tensorboard = tf.keras.callbacks.TensorBoard(logdir, histogram_freq=1)
 
 model = Sequential()
 
@@ -72,17 +69,19 @@ model.add(Embedding(input_dim=vocab_size,
                     output_dim=50,
                     input_length=max_length))
 
-#Layer 2 Recurrent
+#Layer 2 LSTM
+
+#Layer 2 Pool
 model.add(GlobalMaxPool1D())
 
 #Layer 3 Dense
-model.add(Dense(5, activation='relu'))
+model.add(Dense(4, activation='relu'))
 
 
 #Layer 4 Output
-model.add(Dense(1, activation='sigmoid'))
+model.add(Dense(3, activation='softmax'))
 
-model.compile(loss='binary_crossentropy',
+model.compile(loss='sparse_categorical_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
 
@@ -90,4 +89,4 @@ model.summary()
 
 #Train
 
-model.fit(X_train, Y_train, epochs=8, validation_data=(X_test, Y_test), batch_size=5, callbacks = [tensorboard])
+model.fit(X_train, Y_train, epochs=8, validation_data=(X_test, Y_test), batch_size=15, callbacks=[tensorboard])
