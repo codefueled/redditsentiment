@@ -7,6 +7,7 @@ import textfiltersandprocessors as f_methods
 import random
 import datetime, os
 import numpy as np
+import pickle
 
 NUM_COMMENTS = 880
 gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=.333)
@@ -44,6 +45,11 @@ t.fit_on_texts([comment[0] for comment in raw_training_data])
 
 max_length = max(len(comment[0])for comment in raw_training_data)
 vocab_size = len(t.word_index) + 1
+
+f = open("savedtokenizers/hiphopheads3cattokenizer", "wb")
+pickle.dump(t, f)
+pickle.dump(max_length, f)
+f.close()
 #Encoded training data
 X_train = t.texts_to_sequences([comment[0] for comment in raw_training_data])
 X_train = pad_sequences(X_train, maxlen=max_length, padding='post')
@@ -90,3 +96,5 @@ model.summary()
 #Train
 
 model.fit(X_train, Y_train, epochs=8, validation_data=(X_test, Y_test), batch_size=15, callbacks=[tensorboard])
+
+model.save("savedmodels/hiphopheads3cat.h5")

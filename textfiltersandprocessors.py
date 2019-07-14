@@ -42,6 +42,10 @@ def upload_sentiment_DB(filename):
                 continue 
 
 def comment_to_tokens(comment):
+    #Transform quotes into keyword 'quote'
+    comment = check_transform_quotes(comment)
+    #Remove comment edits
+    comment = check_remove_edits(comment)
     #Split comment into word tokens
     tokens = comment.split()
     #Create trans table to map punctuation to empty string
@@ -89,6 +93,17 @@ def remove_emphasis_from_token(token):
 
     return token
 
+def check_transform_quotes(comment):
+    index1 = comment.find('"')
+    index2 = comment[index1+1:].find('"')
+    if index1 != -1 and index2 != -1:
+        return comment[:index1] + "\"quote\"" + comment[index1+index2+2:]
+    else:
+        return comment
 
-
-
+def check_remove_edits(comment):
+    edit_words = ["EDIT:", "EDIT", "Edit:", "Edit", "edit:", "edit"]
+    for word in edit_words:
+        if comment.find(word) != -1:
+            return comment[:comment.find(word)]
+    return comment
