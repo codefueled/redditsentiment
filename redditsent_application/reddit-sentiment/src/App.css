@@ -6,8 +6,8 @@
   background-color: whitesmoke;
 }
 
-.nav {
-  background-color: darkslategray;
+.navbar {
+  background-color: purple;
 }
 
 .homepage {
@@ -28,7 +28,7 @@
 }
 
 .homepage-image {
-  background-image: url("./images/pixel-field-2-1480051.jpg");
+  background-image: url("./components/images/pixel-field-2-1480051.jpg");
   background-size: 125%;
   position: relative;
   min-height: 100%;
