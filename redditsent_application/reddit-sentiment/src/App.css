@@ -1,0 +1,25 @@
+.App {
+  text-align: left;
+  height: 100%;
+}
+
+.nav {
+  background-color: darkslategray;
+}
+
+.homepage {
+  background-color: lightcyan;
+  height: 100%;
+}
+
+.margintop-from-nav {
+  margin-top: 125px;
+}
+
+.card-width {
+  max-width: 18rem;
+}
+
+.icon-card {
+  float: left;
+}
