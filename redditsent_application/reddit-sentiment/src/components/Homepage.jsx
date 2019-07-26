@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CommentCycler from "./CommentCycler";
 import {
-  faHeart,
   faServer,
-  faFileAlt,
-  faArrowRight,
+  faStarHalfAlt,
   faLaugh,
   faFrownOpen
 } from "@fortawesome/free-solid-svg-icons";
@@ -13,106 +11,94 @@ class HomePage extends Component {
   state = {};
   render() {
     return (
-      <div className="container-fluid">
+      <div
+        className="container-fluid"
+        style={{ backgroundColor: "whitesmoke", minHeight: "90vh" }}
+      >
         <div className="row homepage">
-          <div className="col-12 col-lg-4">
+          <div className="col-12 col-lg-5">
             <div
-              class="jumbotron jumbotron-fluid ml-5"
-              style={{ backgroundColor: "#E0FFFF" }}
+              className="jumbotron jumbotron-fluid ml-5"
+              style={{ backgroundColor: "whitesmoke" }}
             >
-              <div class="container">
-                <h1 class="display-4">What is Reddit Thinking?</h1>
-                <p class="lead">
+              <div className="container">
+                <h1 className="display-4">What is Reddit Thinking?</h1>
+                <p className="lead">
                   We use machine learning and sentiment analysis techniques to
                   accurately predict how Reddit feels about a certain topic.
                 </p>
               </div>
             </div>
           </div>
-          <div className="col-4 col-lg-2">
-            <div className="mt-5" style={{ color: "gray" }}>
-              <FontAwesomeIcon icon={faFileAlt} size="5x" />
-              <FontAwesomeIcon icon={faFileAlt} size="5x" />
-              <FontAwesomeIcon icon={faFileAlt} size="5x" />
-              <FontAwesomeIcon icon={faFileAlt} size="5x" />
-              <FontAwesomeIcon icon={faFileAlt} size="5x" />
-              <FontAwesomeIcon icon={faFileAlt} size="5x" />
-              <FontAwesomeIcon icon={faFileAlt} size="5x" />
-              <FontAwesomeIcon icon={faFileAlt} size="5x" />
-              <FontAwesomeIcon icon={faFileAlt} size="5x" />
-              <FontAwesomeIcon icon={faFileAlt} size="5x" />
-              <FontAwesomeIcon icon={faFileAlt} size="5x" />
-              <FontAwesomeIcon icon={faFileAlt} size="5x" />
-            </div>
-          </div>
-          <div className="col-4 margintop-from-nav">
-            <FontAwesomeIcon
-              className="ml-3"
-              icon={faArrowRight}
-              size="10x"
-              style={{ color: "gray" }}
-            />
-            <FontAwesomeIcon
-              className="ml-5"
-              icon={faServer}
-              size="10x"
-              style={{ color: "purple" }}
-            />
-            <div className=" ml-4 mt-5">
-              <CommentCycler />
-            </div>
-          </div>
-
-          <div className="col-4 col-lg-2">
-            <div className="mt-5">
-              <FontAwesomeIcon
-                style={{ color: "lightgreen" }}
-                icon={faLaugh}
-                size="10x"
-              />
-              <FontAwesomeIcon
-                style={{ color: "#FF7F50" }}
-                icon={faFrownOpen}
-                size="10x"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-4">
-            <div>
-              <FontAwesomeIcon
-                className="mt-5"
-                icon={faHeart}
-                size="4x"
-                style={{ color: "orange", float: "left" }}
-              />
-            </div>
-            <div class="card mt-1 ml-1" style={{ float: "left" }}>
-              <div class="card-body">
-                <h5 class="card-title">Opinion</h5>
-                <p class="card-text">Some quick example text t</p>
+          <div className="col-12 col-lg-7 homepage-image">
+            <div
+              className="container-fluid text-white vertical-center justify-content-center d-flex flex-column"
+              style={{
+                position: "absolute"
+              }}
+            >
+              <div className="media" style={{ width: "500px" }}>
+                <div className="lead-5 lh-2 mr-4" style={{ width: "64px" }}>
+                  <FontAwesomeIcon
+                    size="2x"
+                    color="lightgreen"
+                    icon={faLaugh}
+                  />
+                  <FontAwesomeIcon
+                    size="2x"
+                    color="salmon"
+                    icon={faFrownOpen}
+                  />
+                </div>
+                <div className="media-body">
+                  <h5>Sentiment Tracking</h5>
+                  <p>
+                    Find the overall "opinion" of a topic or post on Reddit.
+                  </p>
+                </div>
+              </div>
+              <br />
+              <div className="media" style={{ width: "500px" }}>
+                <div className="lead-5 lh-2 mr-4" style={{ width: "64px" }}>
+                  <FontAwesomeIcon
+                    size="2x"
+                    color="lightblue"
+                    icon={faServer}
+                  />
+                </div>
+                <div className="media-body">
+                  <h5>Machine Learning</h5>
+                  <p>
+                    We use the latest techniques in text classification and
+                    machine learning to classify thousands of Reddit comments.
+                  </p>
+                </div>
+              </div>
+              <br />
+              <div className="media" style={{ width: "500px" }}>
+                <div className="lead-5 lh-2 mr-4" style={{ width: "64px" }}>
+                  <FontAwesomeIcon
+                    icon={faStarHalfAlt}
+                    color="gold"
+                    size="2x"
+                  />
+                </div>
+                <div className="media-body">
+                  <h5>Scoring</h5>
+                  <p>
+                    Each topic recieves a score from 0 to 100 representing
+                    Reddit's perception.
+                  </p>
+                </div>
+              </div>
+              <br />
+              <div style={{ width: "500px" }}>
+                <CommentCycler />
               </div>
             </div>
           </div>
-          <div className="col-4">
-            <div>
-              <FontAwesomeIcon
-                className="mt-5"
-                icon={faHeart}
-                size="4x"
-                style={{ color: "orange", float: "left" }}
-              />
-            </div>
-            <div class="card mt-1 ml-1" style={{ float: "left" }}>
-              <div class="card-body">
-                <h5 class="card-title">Opinion</h5>
-                <p class="card-text">Some quick example text t</p>
-              </div>
-            </div>
-          </div>
-          <div className="col-4" />
         </div>
+        <div className="row" style={{ backgroundColor: "whitesmoke" }} />
       </div>
     );
   }
