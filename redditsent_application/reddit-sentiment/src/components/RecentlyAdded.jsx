@@ -5,38 +5,33 @@ class RecentlyAdded extends Component {
   state = {};
   render() {
     return (
-      <Carousel>
+      <Carousel className="w-25">
         <Carousel.Item>
-          <img className="d-block" src={require("./images/denzel.jpg")} />
+          <img
+            className="d-block w-100"
+            src={require("./images/denzel.jpeg")}
+          />
           <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <h3>TABOO</h3>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <img
-            className="d-block"
-            src="./components/images/denzel-curry-ta13oo-album-art.jpg"
-            alt="Second slide"
+            className="d-block w-100"
+            src={require("./images/DenzelCurry_ZUU_Cover.jpg")}
           />
 
           <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h3>ZUU</h3>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <img
-            className="d-block "
-            src="./components/images/travis-scott-astroworld-second-cover-01.jpg"
-            alt="Third slide"
+            className="d-block w-100"
+            src={require("./images/travis-scott-astroworld-second-cover-01.jpg")}
           />
-
           <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
+            <h3>ASTRO</h3>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
