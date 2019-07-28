@@ -16,6 +16,9 @@ class Navbar extends Component {
           <Link className="nav-link p-2" to="/sentiment">
             <li className="nav-item ">Sentiment</li>
           </Link>
+          <Link className="nav-link" to="/datascience">
+            <li className="nav-item active">Data Science</li>
+          </Link>
           <Link className="nav-link" to="/participate">
             <li className="nav-item active">Participate</li>
           </Link>

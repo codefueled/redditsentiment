@@ -22,6 +22,14 @@ class Participate extends Component {
                   Hopefully you can get a laugh out of a few of them as well.
                 </p>
                 <p className="lead">
+                  Here are five comments. Each may have a positive or negative
+                  tone. Some comments may not be expressing an opinion at all!
+                  You can click through them to read and help us mark them. For
+                  instance, "This is a great idea!" would be classified as
+                  having a positive tone. "I hate this." would be negative. If
+                  you are unsure, you can select "Neither"
+                </p>
+                <p className="lead">
                   We use this data to help train our machine learning models to
                   be more accurate so that they can give you a better idea of
                   how Reddit truly feels.

@@ -7,6 +7,7 @@ import Participate from "./components/Participate";
 import HomePage from "./components/Homepage";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HHHAlbum from "./components/HHHAlbum";
+import DataScience from "./components/DataScience";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/sentiment/specific" component={HHHAlbum} />
           <Route path="/sentiment" exact component={Sentiment} />
           <Route path="/participate" component={Participate} />
+          <Route path="/datascience" component={DataScience} />
         </Switch>
       </div>
     </Router>
