@@ -18,7 +18,7 @@ class Participate extends Component {
               <div className="container">
                 <h1 className="display-4 mb-2">Like our purpose?</h1>
                 <p className="lead">
-                  Contribute to the cause by helping us with a few comments!
+                  Contribute to the cause by helping us classify a few comments!
                   Hopefully you can get a laugh out of a few of them as well.
                 </p>
                 <p className="lead">
@@ -30,7 +30,7 @@ class Participate extends Component {
             </div>
           </div>
           <div className="col-lg-6">
-            <div>
+            <div className="mt-5">
               <CommentSurvey />
             </div>
           </div>
