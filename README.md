@@ -6,8 +6,10 @@ The learning is wrapped in a web application designed to give the user a pleasan
 
 The technologies/tools used in this project are React, Flask, mySQL TensorFlow, Keras, the Reddit API PRAW, and Python.
 ## Code
-The React application code can be located in redditsentiment/redditsent_application/reddit-sentiment/
-The Flask application code can be located in redditsentiment/flask_application/
+The React application code can be located in redditsentiment/redditsent_application/reddit-sentiment/.
+
+The Flask application code can be located in redditsentiment/flask_application/.
+
 The machine learning code and our models can be located in the redditsentiment/ root and redditsentiment/savedmodels.
 ## Still To Do
 1. Refactor code structure to make more hierarchical sense
