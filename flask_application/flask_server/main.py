@@ -8,6 +8,9 @@ import tensorflow as tf
 from keras.preprocessing.sequence import pad_sequences
 from textprocessing import comment_to_tokens
 import pickle
+from flask_cors import CORS
+
+CORS(app)
 
 my_app = Api(app=app, version="1.0",
              title="Reddit Sentiment", description="Test")
@@ -29,13 +32,11 @@ def HipHopHeadsPredictor(comments):
         [comment[0] for comment in comments_to_predict])
     X_eval = pad_sequences(X_eval, maxlen=max_length, padding='post')
     Y_eval = model.predict(X_eval)
-    print([X_eval, Y_eval])
 
     i = 0
     for comment in comments:
         comment.update(
             {'probability': str(max(Y_eval[i])), 'prediction': np.argmax(Y_eval[i]).item()})
-        print([comment, Y_eval[i]])
         i = i + 1
     return comments
 
