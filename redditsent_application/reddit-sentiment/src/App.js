@@ -17,7 +17,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={HomePage} />
 
-          <Route path="/sentiment/specific" component={HHHAlbum} />
+          <Route path="/sentiment/:id" component={HHHAlbum} />
           <Route path="/sentiment" exact component={Sentiment} />
           <Route path="/participate" component={Participate} />
           <Route path="/datascience" component={DataScience} />

@@ -7,7 +7,7 @@ import Score from "./Score";
 class HHHAlbum extends Component {
   state = {
     albumname: "Denzel Curry - ZOO",
-    albumpicpath: "./images/DenzelCurry_ZUU_Cover.jpg",
+    albumpicpath: "./images/Denzel_Curry_-_ZUU.jpg",
     rating: "99.7%",
     numanalyzed: "500",
     toppercent: "90",

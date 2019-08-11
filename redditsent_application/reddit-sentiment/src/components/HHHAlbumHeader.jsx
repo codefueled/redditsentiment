@@ -4,7 +4,7 @@ import CommentCycler from "./CommentCycler";
 class HHHAlbumHeader extends Component {
   state = {
     albumname: "Denzel Curry - ZUU",
-    albumpic: "./images/DenzelCurry_ZUU_Cover.jpg"
+    albumpic: "./images/Denzel_Curry_-_ZUU.jpg"
   };
   render() {
     return (
@@ -12,7 +12,7 @@ class HHHAlbumHeader extends Component {
         <div className="col-lg-3 mt-2">
           <img
             className="w-100"
-            src={require("./images/DenzelCurry_ZUU_Cover.jpg")}
+            src={require("./images/Denzel_Curry_-_ZUU.jpg")}
           />
         </div>
         <div className="col-lg-6">

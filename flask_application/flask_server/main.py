@@ -64,8 +64,64 @@ class CommentCycler(Resource):
             cursor.close()
             conn.close()
 
-
 my_app.add_resource(CommentCycler, '/cycler')
+
+class AllAlbums(Resource):
+    def get(self):
+        try:
+            conn = mysql.connect()
+            cursor = conn.cursor(pymysql.cursors.DictCursor)
+            cursor.execute(
+                "SELECT * FROM album;")
+            rows = cursor.fetchall()
+            resp = jsonify(rows)
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            print(e)
+        finally:
+            cursor.close()
+            conn.close()
+
+my_app.add_resource(AllAlbums, '/allalbums')
+
+class RecentAlbums(Resource):
+    def get(self):
+        try:
+            conn = mysql.connect()
+            cursor = conn.cursor(pymysql.cursors.DictCursor)
+            cursor.execute(
+                "SELECT * FROM album ORDER BY albumID DESC LIMIT 3;")
+            rows = cursor.fetchall()
+            resp = jsonify(rows)
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            print(e)
+        finally:
+            cursor.close()
+            conn.close()
+
+my_app.add_resource(RecentAlbums, '/recentalbums')
+
+class RandomAlbums(Resource):
+    def get(self):
+        try:
+            conn = mysql.connect()
+            cursor = conn.cursor(pymysql.cursors.DictCursor)
+            cursor.execute(
+                "SELECT * FROM album ORDER BY RAND() LIMIT 5;")
+            rows = cursor.fetchall()
+            resp = jsonify(rows)
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            print(e)
+        finally:
+            cursor.close()
+            conn.close()
+
+my_app.add_resource(RandomAlbums, '/randomalbums')
 
 if __name__ == '__main__':
     app.run(debug=True)
