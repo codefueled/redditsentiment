@@ -123,5 +123,24 @@ class RandomAlbums(Resource):
 
 my_app.add_resource(RandomAlbums, '/randomalbums')
 
+class CommentCount(Resource):
+    def get(self):
+        try:
+            conn = mysql.connect()
+            cursor = conn.cursor(pymysql.cursors.DictCursor)
+            cursor.execute(
+                "SELECT COUNT(*) AS count FROM comments;")
+            rows = cursor.fetchall()
+            resp = jsonify(rows)
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            print(e)
+        finally:
+            cursor.close()
+            conn.close()
+
+my_app.add_resource(CommentCount, '/commentcount')
+
 if __name__ == '__main__':
     app.run(debug=True)

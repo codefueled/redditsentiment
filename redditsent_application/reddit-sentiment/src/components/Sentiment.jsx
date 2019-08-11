@@ -6,6 +6,7 @@ import SubredditTitle from "./SubredditTitle";
 import RecentlyAdded from "./RecentlyAdded";
 import RandomizedTopics from "./RandomizedTopics";
 import API from "./utils/API";
+import CountUp from "react-countup";
 
 class Sentiment extends Component {
   state = {
@@ -18,6 +19,12 @@ class Sentiment extends Component {
   render() {
     var recentlyAddedChild = this.state.ready ? (
       <RecentlyAdded recentlyAdded={this.state.recentlyAddedAlbums} />
+    ) : (
+      ""
+    );
+
+    var randomAlbumsChild = this.state.ready ? (
+      <RandomizedTopics randomAlbums={this.state.randomAlbums} />
     ) : (
       ""
     );
@@ -55,7 +62,25 @@ class Sentiment extends Component {
                     style={{ backgroundColor: "white" }}
                   >
                     <div className="container">
-                      <h1 className="display-4">Comments Analyzed: 8673</h1>
+                      <h1 className="display-4">
+                        <div>
+                          Comments Analyzed:
+                          <span style={{ display: "inline" }}>
+                            <CountUp
+                              start={0}
+                              end={this.state.commentsAnalyzed}
+                              duration={4}
+                              delay={0}
+                            >
+                              {({ countUpRef }) => (
+                                <div>
+                                  <span ref={countUpRef} />
+                                </div>
+                              )}
+                            </CountUp>
+                          </span>
+                        </div>
+                      </h1>
                       <p className="lead">
                         HipHopHeads is a music subreddit regarding everything
                         hip-hop. Latest hip-hop albums, trends, and artists are
@@ -74,9 +99,7 @@ class Sentiment extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-2">
-                <RandomizedTopics />
-              </div>
+              <div className="col-lg-2">{randomAlbumsChild}</div>
             </div>
           </div>
         </div>
@@ -120,11 +143,16 @@ class Sentiment extends Component {
       returnRandomAlbums.push(randomAlbumObj);
     });
 
+    var returnCommentCount = 0;
+    let commentCount = await API.get("commentcount");
+    returnCommentCount = commentCount.data[0]["count"];
+
     this.setState({
       ready: true,
       albums: returnAllAlbums,
       recentlyAddedAlbums: returnRecentAlbums,
-      randomAlbums: returnRandomAlbums
+      randomAlbums: returnRandomAlbums,
+      commentsAnalyzed: returnCommentCount
     });
     console.log(this.state);
   }

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class RandomizedTopics extends Component {
   state = {};
@@ -7,10 +8,13 @@ class RandomizedTopics extends Component {
       <div className="card" style={{ width: "18rem" }}>
         <div className="card-header font-weight-bold">Randomized:</div>
         <ul className="list-group list-group-flush">
-          <li className="list-group-item">Travis Scott: Astroworld</li>
-          <li className="list-group-item">Chance the Rapper: Big Day</li>
-          <li className="list-group-item">YBN Cordae: The Lost Boy</li>
-          <li className="list-group-item">Kanye: Yeezus</li>
+          {this.props.randomAlbums.map(album => (
+            <Link to={`/sentiment/${album.id}`}>
+              <li key={album.id} className="list-group-item">
+                {album.name}
+              </li>
+            </Link>
+          ))}
         </ul>
       </div>
     );
