@@ -64,7 +64,9 @@ class CommentCycler(Resource):
             cursor.close()
             conn.close()
 
+
 my_app.add_resource(CommentCycler, '/cycler')
+
 
 class AllAlbums(Resource):
     def get(self):
@@ -83,7 +85,9 @@ class AllAlbums(Resource):
             cursor.close()
             conn.close()
 
+
 my_app.add_resource(AllAlbums, '/allalbums')
+
 
 class RecentAlbums(Resource):
     def get(self):
@@ -102,7 +106,9 @@ class RecentAlbums(Resource):
             cursor.close()
             conn.close()
 
+
 my_app.add_resource(RecentAlbums, '/recentalbums')
+
 
 class RandomAlbums(Resource):
     def get(self):
@@ -121,7 +127,9 @@ class RandomAlbums(Resource):
             cursor.close()
             conn.close()
 
+
 my_app.add_resource(RandomAlbums, '/randomalbums')
+
 
 class CommentCount(Resource):
     def get(self):
@@ -140,7 +148,30 @@ class CommentCount(Resource):
             cursor.close()
             conn.close()
 
+
 my_app.add_resource(CommentCount, '/commentcount')
+
+
+class HHHAlbum(Resource):
+    def get(self):
+        try:
+            id = request.args.get('albumid', '')
+            conn = mysql.connect()
+            cursor = conn.cursor(pymysql.cursors.DictCursor)
+            query = "SELECT * FROM album WHERE albumID = %s"
+            cursor.execute(query, id)
+            rows = cursor.fetchall()
+            resp = jsonify(rows)
+            resp.status_code = 200
+            return resp
+        except Exception as e:
+            print(e)
+        finally:
+            cursor.close()
+            conn.close()
+
+
+my_app.add_resource(HHHAlbum, '/hhhalbum')
 
 if __name__ == '__main__':
     app.run(debug=True)
