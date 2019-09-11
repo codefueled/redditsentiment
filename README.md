@@ -15,10 +15,13 @@ The Flask application code can be located in flask_application/flask_server/.
 The machine learning code and the models can be located in tensorflow_kerasML/.
 
 ## Example Images
-![Homepage](HHHImage.JPG)
+Homepage
+![Homepage](homepageimg.JPG)
 
-![HipHopHeads Overview](homepageimg.JPG)
+HipHopHeads Overview
+![HipHopHeads Overview](HHHimage.JPG)
 
+Specific Album Page
 ![HipHopHeads Album](specificalbumimg.JPG)
 
 ## Still To Do
