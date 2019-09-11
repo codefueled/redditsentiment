@@ -31,7 +31,10 @@ class HomePage extends Component {
             </div>
           </div>
           <div className="col-12 col-lg-7 homepage-image">
-            <div className="container-fluid text-white vertical-center justify-content-center d-flex flex-column">
+            <div
+              className="container-fluid text-white vertical-center justify-content-center d-flex flex-column"
+              style={{ position: "absolute" }}
+            >
               <div className="media" style={{ width: "500px" }}>
                 <div className="lead-5 lh-2 mr-4" style={{ width: "64px" }}>
                   <FontAwesomeIcon
